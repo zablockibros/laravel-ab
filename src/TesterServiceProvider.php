@@ -62,15 +62,18 @@ class TesterServiceProvider extends ServiceProvider {
             $class = 'Jenssegers\\AB\\Commands\\' . ucfirst($command) . 'Command';
             $command = "ab::command.$class";
 
-            $this->app->bind($class, function($app) use ($class)
-            {
-                return new $class();
-            });
-            $this->app->alias($class, $command);
+            $this->commands([
+                $class,
+            ]);
+
+            //$this->app->bind($class, function($app) use ($class)
+            //{
+            //    return new $class();
+            //});
         }
 
         // Register artisan commands.
-        $this->commands($commands);
+        //$this->commands($commands);
     }
 
 }
